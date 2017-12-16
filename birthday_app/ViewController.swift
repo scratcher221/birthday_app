@@ -12,11 +12,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Test
     }
-
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        performSegue(withIdentifier: "showTabBarController", sender: self)
+    }
 
 }
 
