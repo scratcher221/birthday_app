@@ -15,6 +15,12 @@
 		6341A9911FE5586300F61F9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6341A98F1FE5586300F61F9A /* LaunchScreen.storyboard */; };
 		6341A99C1FE5586300F61F9A /* birthday_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A99B1FE5586300F61F9A /* birthday_appTests.swift */; };
 		6341A9A71FE5586300F61F9A /* birthday_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A9A61FE5586300F61F9A /* birthday_appUITests.swift */; };
+		6341A9B51FE859E000F61F9A /* UpcomingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A9B41FE859E000F61F9A /* UpcomingTableViewController.swift */; };
+		6341A9B91FE85B6100F61F9A /* UpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A9B81FE85B6100F61F9A /* UpcomingCell.swift */; };
+		6341A9BD1FE85EDD00F61F9A /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A9BC1FE85EDD00F61F9A /* PersonViewController.swift */; };
+		6341A9C11FE862B600F61F9A /* AddNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341A9C01FE862B600F61F9A /* AddNewViewController.swift */; };
+		6341A9C81FE8672800F61F9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6341A9871FE5586300F61F9A /* Main.storyboard */; };
+		6341A9C91FE8672900F61F9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6341A9871FE5586300F61F9A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,10 @@
 		6341A9A21FE5586300F61F9A /* birthday_appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = birthday_appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6341A9A61FE5586300F61F9A /* birthday_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = birthday_appUITests.swift; sourceTree = "<group>"; };
 		6341A9A81FE5586300F61F9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6341A9B41FE859E000F61F9A /* UpcomingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTableViewController.swift; sourceTree = "<group>"; };
+		6341A9B81FE85B6100F61F9A /* UpcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCell.swift; sourceTree = "<group>"; };
+		6341A9BC1FE85EDD00F61F9A /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
+		6341A9C01FE862B600F61F9A /* AddNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,10 @@
 				6341A9831FE5586300F61F9A /* AppDelegate.swift */,
 				6341A9851FE5586300F61F9A /* ViewController.swift */,
 				6341A9871FE5586300F61F9A /* Main.storyboard */,
+				6341A9C01FE862B600F61F9A /* AddNewViewController.swift */,
+				6341A9BC1FE85EDD00F61F9A /* PersonViewController.swift */,
+				6341A9B41FE859E000F61F9A /* UpcomingTableViewController.swift */,
+				6341A9B81FE85B6100F61F9A /* UpcomingCell.swift */,
 				6341A98D1FE5586300F61F9A /* Assets.xcassets */,
 				6341A98F1FE5586300F61F9A /* LaunchScreen.storyboard */,
 				6341A9921FE5586300F61F9A /* Info.plist */,
@@ -245,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6341A9C81FE8672800F61F9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6341A9C91FE8672900F61F9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,8 +279,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6341A98C1FE5586300F61F9A /* birthday_app.xcdatamodeld in Sources */,
+				6341A9BD1FE85EDD00F61F9A /* PersonViewController.swift in Sources */,
+				6341A9B91FE85B6100F61F9A /* UpcomingCell.swift in Sources */,
 				6341A9861FE5586300F61F9A /* ViewController.swift in Sources */,
 				6341A9841FE5586300F61F9A /* AppDelegate.swift in Sources */,
+				6341A9C11FE862B600F61F9A /* AddNewViewController.swift in Sources */,
+				6341A9B51FE859E000F61F9A /* UpcomingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
