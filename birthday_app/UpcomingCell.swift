@@ -11,6 +11,8 @@ import UIKit
 class UpcomingCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var birthdayLabel: UILabel!
+    @IBOutlet weak var daysLeftLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

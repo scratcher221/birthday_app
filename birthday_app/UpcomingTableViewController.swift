@@ -39,6 +39,7 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.rowHeight = CGFloat(75.0)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,9 +58,13 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! UpcomingCell
         let personEntry = self.fetchedResultsController.object(at: indexPath) as! PersonEntry
         cell.nameLabel.text = personEntry.name
+        cell.birthdayLabel.text = "TEST"
         return cell
     }
     

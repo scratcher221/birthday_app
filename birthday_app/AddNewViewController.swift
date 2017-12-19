@@ -12,6 +12,8 @@ import CoreData
 class AddNewViewController: UIViewController {
     
     @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var birthday: UIDatePicker!
+    
     // define Context for Core Data
     lazy var managedContext: NSManagedObjectContext? = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -28,6 +30,7 @@ class AddNewViewController: UIViewController {
         print("Entry is being saved...")
         let personEntry = NSEntityDescription.insertNewObject(forEntityName: "PersonEntry", into: self.managedContext!) as! PersonEntry
         personEntry.name = name.text
+        personEntry.birthday = birthday.date
         save()
         performSegue(withIdentifier: "showUpcoming", sender: self)
     }
