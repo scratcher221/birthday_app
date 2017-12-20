@@ -26,7 +26,18 @@ class AddNewViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func onClickDone(_ sender: UIBarButtonItem) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showUpcoming" {
+            print("YEA")
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 0
+            let navigationController = tabBarController.selectedViewController as! UINavigationController
+            let tVC = navigationController.visibleViewController as! UpcomingTableViewController
+            tVC.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func onClick(_ sender: UIBarButtonItem) {
         print("Entry is being saved...")
         let personEntry = NSEntityDescription.insertNewObject(forEntityName: "PersonEntry", into: self.managedContext!) as! PersonEntry
         personEntry.name = name.text
@@ -40,4 +51,6 @@ class AddNewViewController: UIViewController {
         }
         appDelegate.saveContext()
     }
+    
+    
 }

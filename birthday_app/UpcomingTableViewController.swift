@@ -9,7 +9,21 @@
 import UIKit
 import CoreData
 
+class Person {
+    var name: String
+    var birthday: Date
+    var daysLeft: Int
+    
+    init(name: String, birthday: Date, daysLeft: Int) {
+        self.name = name
+        self.birthday = birthday
+        self.daysLeft = daysLeft
+    }
+}
+
 class UpcomingTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    var personArray: [Person] = []
     
     lazy var fetchedResultsController: NSFetchedResultsController<NSManagedObject> = {
         let request = NSFetchRequest<NSManagedObject>(entityName: "PersonEntry")
@@ -40,6 +54,23 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = CGFloat(75.0)
+        var personArray = [Person]()
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let dayCurrent = calendar.ordinality(of: .day, in: .year, for: currentDate)
+        for value in fetchedResultsController.fetchedObjects as! [NSManagedObject] {
+            let name = value.value(forKey: "name") as! String
+            let birthday = value.value(forKey: "birthday") as! Date
+            let dayBirthday = calendar.ordinality(of: .day, in: .year, for: birthday)
+            var daysLeft = dayBirthday! - dayCurrent!
+            if daysLeft < 0 {
+                daysLeft = 365 + daysLeft
+            }
+            let person = Person(name: name, birthday: birthday, daysLeft: daysLeft)
+            personArray.append(person)
+        }
+        personArray = personArray.sorted(by: {$0.daysLeft < $1.daysLeft})
+        self.personArray = personArray
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,14 +89,21 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let birthday = personArray[indexPath.row].birthday
+        let name = personArray[indexPath.row].name
+        let daysLeft = personArray[indexPath.row].daysLeft
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "EEEE, d. MMMM"
+        let birthdayString = dateFormatter.string(from: birthday)
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! UpcomingCell
-        let personEntry = self.fetchedResultsController.object(at: indexPath) as! PersonEntry
-        cell.nameLabel.text = personEntry.name
-        cell.birthdayLabel.text = "TEST"
+        cell.nameLabel.text = name
+        cell.birthdayLabel.text = birthdayString
+        cell.daysLeftLabel.text = String(daysLeft)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -103,7 +141,7 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
             let selectedCell = sender as! UpcomingCell
             let name = selectedCell.nameLabel.text
             personVC.personNavigationBar.title = name
-            personVC.personNavigationBar.backBarButtonItem?.title = "TEST"
+            personVC.birthday = selectedCell.birthdayLabel.text!
         }
     }
 }

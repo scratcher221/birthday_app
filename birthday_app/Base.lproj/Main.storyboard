@@ -69,7 +69,7 @@
                                     <navigationItem title="Add New Entry" id="caO-Rg-5k7">
                                         <barButtonItem key="rightBarButtonItem" title="Done" id="ata-iu-CTC">
                                             <connections>
-                                                <action selector="onClickDone:" destination="BYU-3m-gwE" id="fun-dH-kVR"/>
+                                                <action selector="onClick:" destination="BYU-3m-gwE" id="hxD-97-MsM"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -111,7 +111,7 @@
                     <connections>
                         <outlet property="birthday" destination="7pZ-of-3Vc" id="TKc-Cc-Epc"/>
                         <outlet property="name" destination="JcU-HC-qDh" id="itl-pk-IkL"/>
-                        <segue destination="F5o-um-iJs" kind="show" identifier="showUpcoming" id="axp-cA-4gU"/>
+                        <segue destination="F5o-um-iJs" kind="show" identifier="showUpcoming" id="RAq-ac-eyx"/>
                     </connections>
                 </viewController>
             </objects>
@@ -186,7 +186,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01/01/95" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epx-no-fbe">
-                                            <rect key="frame" x="16" y="36" width="55" height="21"/>
+                                            <rect key="frame" x="16" y="36" width="343" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -236,6 +236,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="axp-cA-4gU"/>
+        <segue reference="RAq-ac-eyx"/>
     </inferredMetricsTieBreakers>
 </document>

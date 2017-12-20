@@ -10,6 +10,8 @@ import UIKit
 
 class PersonViewController: UIViewController {
     
+    var birthday = ""
+    
     @IBOutlet weak var personNavigationBar: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
