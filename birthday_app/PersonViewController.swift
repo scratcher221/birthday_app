@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import SwiftSoup
 
 class PersonViewController: UIViewController {
     
