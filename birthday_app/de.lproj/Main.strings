@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "0OV-br-gH2"; */
+"0OV-br-gH2.text" = "Name";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "0YH-aW-12z"; */
+"0YH-aW-12z.title" = "Zurück";
+
+/* Class = "UINavigationItem"; title = "Person Entry"; ObjectID = "1dq-sF-t7Q"; */
+"1dq-sF-t7Q.title" = "Personen Eintrag";
+
+/* Class = "UINavigationItem"; title = "Sync"; ObjectID = "2AA-Df-Ut9"; */
+"2AA-Df-Ut9.title" = "Sync";
+
+/* Class = "UITabBarItem"; title = "Sync"; ObjectID = "6wc-i6-d9c"; */
+"6wc-i6-d9c.title" = "Sync";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "CLZ-jf-l0J"; */
+"CLZ-jf-l0J.text" = "10";
+
+/* Class = "UITabBarItem"; title = "Birthdays"; ObjectID = "F4U-GE-UTT"; */
+"F4U-GE-UTT.title" = "Geburtstage";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "XMI-ia-PLs"; */
+"XMI-ia-PLs.text" = "Name:";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "ata-iu-CTC"; */
+"ata-iu-CTC.title" = "Fertig";
+
+/* Class = "UINavigationItem"; title = "Add New Entry"; ObjectID = "caO-Rg-5k7"; */
+"caO-Rg-5k7.title" = "Neuer Eintrag";
+
+/* Class = "UILabel"; text = "01/01/95"; ObjectID = "epx-no-fbe"; */
+"epx-no-fbe.text" = "01/01/95";
+
+/* Class = "UINavigationItem"; title = "Upcoming"; ObjectID = "lUY-m0-FkK"; */
+"lUY-m0-FkK.title" = "Demnächst";
+
+/* Class = "UITabBarItem"; title = "Add"; ObjectID = "uGI-aP-MUM"; */
+"uGI-aP-MUM.title" = "Hinzufügen";
+
+/* Class = "UILabel"; text = "Birthday:"; ObjectID = "yTn-qJ-JMN"; */
+"yTn-qJ-JMN.text" = "Geburtstag:";

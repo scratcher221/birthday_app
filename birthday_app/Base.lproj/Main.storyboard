@@ -56,7 +56,6 @@
         <!--Add-->
         <scene sceneID="x32-Ym-Xsm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7lb-4f-VcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="BYU-3m-gwE" customClass="AddNewViewController" customModule="birthday_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vNZ-rj-9bo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -114,6 +113,7 @@
                         <segue destination="F5o-um-iJs" kind="show" identifier="showUpcoming" id="RAq-ac-eyx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7lb-4f-VcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3213.5999999999999" y="130.88455772113943"/>
         </scene>

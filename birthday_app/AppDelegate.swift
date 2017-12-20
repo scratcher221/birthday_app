@@ -8,15 +8,28 @@
 
 import UIKit
 import CoreData
+import UserNotificationsUI
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert]) {
+            (granted, error) -> Void in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
+        let defaultCategory = UNNotificationCategory(identifier: "default_category",
+                                                                    actions: [],
+                                                                    intentIdentifiers: [],
+                                                                    options: .customDismissAction)
+        center.setNotificationCategories([defaultCategory])
         return true
     }
 

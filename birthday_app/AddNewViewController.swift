@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import UserNotifications
+import UserNotificationsUI
 
 class AddNewViewController: UIViewController {
     
@@ -43,13 +45,36 @@ class AddNewViewController: UIViewController {
         personEntry.name = name.text
         personEntry.birthday = birthday.date
         save()
+        createNewNotification(birthday: birthday.date, name: name.text!)
+        
         performSegue(withIdentifier: "showUpcoming", sender: self)
     }
+    
     func save() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         appDelegate.saveContext()
+    }
+    
+    func createNewNotification(birthday: Date, name: String) {
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("Birthday Notification", comment: "")
+        content.body = String.localizedStringWithFormat(NSLocalizedString("It's %@'s birthday today!", comment: ""), name)
+        content.sound = UNNotificationSound.default()
+        content.categoryIdentifier = "default_category"
+        
+        var triggerDate = Calendar.current.dateComponents([.month,.day,.hour,.minute,], from: birthday)
+        triggerDate.hour = 22
+        triggerDate.minute = 56
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+        let request = UNNotificationRequest(identifier: "birthday_notification", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            if error != nil {
+                print("An error occured.")
+            }
+        }
     }
     
     
