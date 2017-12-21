@@ -13,7 +13,9 @@ import SwiftSoup
 class PersonViewController: UIViewController {
     
     var birthday = String()
+    var birthdayDate = Date()
     var age = Int()
+    var infoTextString = String()
     @IBOutlet weak var infoText: UITextView!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var personNavigationBar: UINavigationItem!
@@ -22,7 +24,13 @@ class PersonViewController: UIViewController {
         super.viewDidLoad()
         var htmlContent = "Empty :("
         // Download HTML data
-        let infoUrl = URL(string: "https://www.onthisday.com/date/1960/december/29")!
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "MMMM/d"
+        let dateString = dateFormatter.string(from: birthdayDate)
+        let urlString = "https://www.onthisday.com/birthdays/date/1960/\(dateString)"
+        print(urlString)
+        let infoUrl = URL(string: urlString)!
         let task = URLSession.shared.dataTask(with: infoUrl) { (data, response, error) in
             if error != nil {
                 print(error!)
@@ -30,30 +38,49 @@ class PersonViewController: UIViewController {
             else {
                 htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)! as String
                 self.parse(htmlContent: htmlContent)
+                self.performSelector(onMainThread: #selector(self.updateInfoText), with: nil, waitUntilDone: false)
             }
         }
         task.resume()
         birthdayLabel.text = birthday
-        ageLabel.text = String(age)
+        let ageString = "\(age) Years"
+        ageLabel.text = String.localizedStringWithFormat(NSLocalizedString("%d Years", comment: ""), age)
     }
     
     func parse(htmlContent: String) {
         do {
             let doc: Document = try! SwiftSoup.parse(htmlContent)
-            /*let link: Element = try! doc.select("a").first()!
-            let text: String = try! doc.body()!.text(); // "An example link"
-            let linkHref: String = try! link.attr("href"); // "http://example.com/"
-            let linkText: String = try! link.text(); // "example""
-            let linkOuterH: String = try! link.outerHtml(); // "<a href="http://example.com"><b>example</b></a>"
-            let linkInnerH: String = try! link.html(); // "<b>example</b>"*/
             let content = try! doc.getElementsByClass("event-list__item").array()
-            let test = content[0]
-            let text: String = (try! test.text())
-            print(text)
+            var p1 = content[0]
+            var p2 = p1
+            var p3 = p1
+            if content.count > 1 {
+                p2 = content[1]
+                if content.count > 2 {
+                    p3 = content[2]
+                }
+            }
+            let person1: String = (try! p1.text())
+            var person2: String = (try! p2.text())
+            var person3: String = (try! p3.text())
+            if person2 == person1 {
+                person2 = ""
+            }
+            if person3 == person1 {
+                person3 = ""
+            }
+            let multiLineString = "\(person1)\n\n\(person2)\n\n\(person3)"
+            self.infoTextString = multiLineString
         } catch Exception.Error(let type, let message) {
             print(message)
         } catch {
             print("error")
         }
     }
+    
+    @IBAction func updateInfoText() {
+        infoText.text = infoTextString
+    }
+    
+    
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import UserNotificationsUI
+import UserNotifications
 
 // Custom Person class is needed to sort the TableView by days left until birthday
 // Every time the table is reloaded a Person array is created from the fetchedResultsController
@@ -98,7 +100,7 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! UpcomingCell
-        if personArray.count > 0 {
+        if personArray.count > indexPath.row {
             let birthday = personArray[indexPath.row].birthday
             let name = personArray[indexPath.row].name
             let daysLeft = personArray[indexPath.row].daysLeft
@@ -114,8 +116,18 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.managedContext?.delete(fetchedResultsController.fetchedObjects![indexPath.row])
+            do {
+                try self.managedContext?.save()
+            } catch {
+            }
+            let cell = tableView.cellForRow(at: indexPath) as? UpcomingCell
+            let name = cell?.nameLabel.text!
+            let center = UNUserNotificationCenter.current()
+            center.removePendingNotificationRequests(withIdentifiers: ["birthday_notification\(name)"])
+        }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -162,6 +174,7 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
             personVC.personNavigationBar.title = name
             personVC.birthday = selectedCell.birthdayLabel.text!
             personVC.age = age
+            personVC.birthdayDate = selectedCell.birthday
         }
     }
 }

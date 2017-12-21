@@ -68,7 +68,7 @@ class AddNewViewController: UIViewController {
         triggerDate.hour = 22
         triggerDate.minute = 56
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-        let request = UNNotificationRequest(identifier: "birthday_notification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "birthday_notification_\(name)", content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request) { (error) in
             if error != nil {
@@ -76,6 +76,4 @@ class AddNewViewController: UIViewController {
             }
         }
     }
-    
-    
 }
