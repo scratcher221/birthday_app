@@ -10,6 +10,8 @@ import UIKit
 
 class UpcomingCell: UITableViewCell {
 
+    var birthday = Date()
+    var birthdayNextYear = false
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var daysLeftLabel: UILabel!

@@ -9,15 +9,21 @@
 import UIKit
 import CoreData
 
+// Custom Person class is needed to sort the TableView by days left until birthday
+// Every time the table is reloaded a Person array is created from the fetchedResultsController
+// This array also contains the days left until birthday, which is calculated on every reload
+// The Person array then provides the content for the cells of the Table View
 class Person {
     var name: String
     var birthday: Date
     var daysLeft: Int
+    var birthdayNextYear: Bool
     
-    init(name: String, birthday: Date, daysLeft: Int) {
+    init(name: String, birthday: Date, daysLeft: Int, birthdayNextYear: Bool) {
         self.name = name
         self.birthday = birthday
         self.daysLeft = daysLeft
+        self.birthdayNextYear = birthdayNextYear
     }
 }
 
@@ -63,10 +69,12 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
             let birthday = value.value(forKey: "birthday") as! Date
             let dayBirthday = calendar.ordinality(of: .day, in: .year, for: birthday)
             var daysLeft = dayBirthday! - dayCurrent!
+            var birthdayNextYear = false
             if daysLeft < 0 {
                 daysLeft = 365 + daysLeft
+                birthdayNextYear = true
             }
-            let person = Person(name: name, birthday: birthday, daysLeft: daysLeft)
+            let person = Person(name: name, birthday: birthday, daysLeft: daysLeft, birthdayNextYear: birthdayNextYear)
             personArray.append(person)
         }
         personArray = personArray.sorted(by: {$0.daysLeft < $1.daysLeft})
@@ -89,16 +97,20 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let birthday = personArray[indexPath.row].birthday
-        let name = personArray[indexPath.row].name
-        let daysLeft = personArray[indexPath.row].daysLeft
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, d. MMMM"
-        let birthdayString = dateFormatter.string(from: birthday)
         let cell = tableView.dequeueReusableCell(withIdentifier: "upcomingCell", for: indexPath) as! UpcomingCell
-        cell.nameLabel.text = name
-        cell.birthdayLabel.text = birthdayString
-        cell.daysLeftLabel.text = String(daysLeft)
+        if personArray.count > 0 {
+            let birthday = personArray[indexPath.row].birthday
+            let name = personArray[indexPath.row].name
+            let daysLeft = personArray[indexPath.row].daysLeft
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE, d. MMMM"
+            let birthdayString = dateFormatter.string(from: birthday)
+            cell.nameLabel.text = name
+            cell.birthdayLabel.text = birthdayString
+            cell.daysLeftLabel.text = String(daysLeft)
+            cell.birthday = birthday
+            cell.birthdayNextYear = personArray[indexPath.row].birthdayNextYear
+        }
         return cell
     }
     
@@ -140,8 +152,16 @@ class UpcomingTableViewController: UITableViewController, NSFetchedResultsContro
             let personVC = segue.destination as! PersonViewController
             let selectedCell = sender as! UpcomingCell
             let name = selectedCell.nameLabel.text
+            let currentDate = Date()
+            let birthdayComponents = Calendar.current.dateComponents([.year, .month, .day], from: selectedCell.birthday)
+            let currentDayComponents = Calendar.current.dateComponents([.year, .month, .day], from: currentDate)
+            var age = currentDayComponents.year! - birthdayComponents.year!
+            if selectedCell.birthdayNextYear {
+                age = age + 1
+            }
             personVC.personNavigationBar.title = name
             personVC.birthday = selectedCell.birthdayLabel.text!
+            personVC.age = age
         }
     }
 }

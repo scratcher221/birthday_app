@@ -29,8 +29,8 @@ class AddNewViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Reload data in TableView after adding a new entry
         if segue.identifier == "showUpcoming" {
-            print("YEA")
             let tabBarController = segue.destination as! UITabBarController
             tabBarController.selectedIndex = 0
             let navigationController = tabBarController.selectedViewController as! UINavigationController
@@ -40,13 +40,13 @@ class AddNewViewController: UIViewController {
     }
     
     @IBAction func onClick(_ sender: UIBarButtonItem) {
+        // Save entry and create Local Notification
         print("Entry is being saved...")
         let personEntry = NSEntityDescription.insertNewObject(forEntityName: "PersonEntry", into: self.managedContext!) as! PersonEntry
         personEntry.name = name.text
         personEntry.birthday = birthday.date
         save()
         createNewNotification(birthday: birthday.date, name: name.text!)
-        
         performSegue(withIdentifier: "showUpcoming", sender: self)
     }
     
@@ -63,7 +63,7 @@ class AddNewViewController: UIViewController {
         content.body = String.localizedStringWithFormat(NSLocalizedString("It's %@'s birthday today!", comment: ""), name)
         content.sound = UNNotificationSound.default()
         content.categoryIdentifier = "default_category"
-        
+        // Set the trigger for the Local Notification (trigger on birthday)
         var triggerDate = Calendar.current.dateComponents([.month,.day,.hour,.minute,], from: birthday)
         triggerDate.hour = 22
         triggerDate.minute = 56
